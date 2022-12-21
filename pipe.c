@@ -19,7 +19,8 @@ int	main()
 		printf("print from child ");
 		exit(0);
 	}
+	wait(0);
 	char	str[5];
-	read(fd[0], str, 5);
+	read(fd[0], str, 4);
 	printf("test : %s\n", str);
 }
