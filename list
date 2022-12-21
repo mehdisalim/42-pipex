@@ -1,0 +1,22 @@
+total 200
+drwxr-xr-x  21 esalim  candidates    714 Dec 21 11:40 .
+drwxr-xr-x   8 esalim  candidates    272 Dec 20 12:50 ..
+-rw-------   1 esalim  candidates  12288 Dec 21 10:40 .access.c.swp
+-rw-------   1 esalim  candidates  12288 Dec 21 11:14 .dup.c.swp
+-rw-------   1 esalim  candidates  12288 Dec 21 11:40 .execve.c.swp
+drwxr-xr-x  12 esalim  candidates    408 Dec 21 11:20 .git
+-rwxr-xr-x   1 esalim  candidates  12688 Dec 21 11:40 a.out
+-rw-r--r--   1 esalim  candidates    284 Dec 21 10:40 access.c
+-rw-r--r--   1 esalim  candidates    347 Dec 21 11:14 dup.c
+-rw-r--r--   1 esalim  candidates    170 Dec 21 11:40 execve.c
+-rw-r--r--   1 esalim  candidates     59 Dec 20 18:47 file
+-rw-r--r--   1 esalim  candidates      0 Dec 20 14:52 file1
+-rw-r--r--   1 esalim  candidates     37 Dec 20 16:45 file2
+-rw-r--r--   1 esalim  candidates    528 Dec 20 16:45 filedescriptor.c
+-rw-r--r--   1 esalim  candidates      0 Dec 21 11:40 list
+-rw-r--r--   1 esalim  candidates    195 Dec 20 12:54 main.c
+-rw-r--r--   1 esalim  candidates    202 Dec 20 15:56 main2.c
+-rw-r--r--   1 esalim  candidates      9 Dec 20 19:59 outfile
+-rw-r--r--   1 esalim  candidates    609 Dec 20 20:16 pipe.c
+-rw-r--r--   1 esalim  candidates   1272 Dec 21 10:07 pipe2.c
+-rwxr-xr-x   1 esalim  candidates      1 Dec 21 11:13 test
