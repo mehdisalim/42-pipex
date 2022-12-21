@@ -5,8 +5,7 @@
 
 /* Read characters from the pipe and echo them to stdout. */
 
-void
-read_from_pipe (int file)
+void read_from_pipe (int file)
 {
   FILE *stream;
   int c;
