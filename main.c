@@ -1,40 +1,51 @@
 #include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
 #include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
 
-char	*cmd1[] = {"/bin/sh", "-c", "ls -al", 0};
-char	*cmd2[] = {"/bin/sh", "grep .", 0};
-
-void	child_process(int fds[2])
+void	child_process(int pfd[2], char **av)
 {
-	dup2(fds[1], 1);
-	execve(cmd1[1], cmd1, 0);
-	char	*str = malloc(100);
-	//read(0, str, 100);
-	write(1, str, 100);
+	char *command[] = {"/bin/bash", "-c", av[2], 0};
+	close(pfd[0]);
+	int fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		exit(0);
+	dup2(fd, STDIN_FILENO);
+	dup2(pfd[1], STDOUT_FILENO);
+	execve(command[0], command, 0);
+	close(fd);
+	exit(0);
 }
 
-void	parent_process(int fds[2])
+void	parent_process(int pfd[2], char	**av)
 {
-	wait(0);
-	close(fds[1]);
-	dup2(fds[0], 0);
-	char	*str = malloc(100);
-	read(fds[0], str, 100);
-	printf("%s\n", str);
+	char	*command[] = {"/bin/bash", "-c", av[3], NULL};
+	close(pfd[1]);
+//	close(STDOUT_FILENO);
+	int fd = open(av[4], O_WRONLY | O_CREAT, 0777);
+	if (fd == -1)
+	{
+		printf("fd is equal -1");
+		exit(0);
+	}
+//	dup(fd);
+	dup2(pfd[0], STDIN_FILENO);
+	dup2(fd, STDOUT_FILENO);
+	execve(command[0], command, 0);
+	close(fd);
 }
-int main()
+
+int	main(int argc, char *av[])
 {
-	int fds[2];
-	if (pipe(fds) == -1)
-		perror("pipe :0\n");
+	int pfd[2];
+	pipe(pfd);
+
 	int pid = fork();
-	if (pid == -1)
-		perror("fork :0\n");
 	if (pid == 0)
-		child_process(fds);
-	else
-		parent_process(fds);
-	return (0);
+		child_process(pfd, av);
+	wait(NULL);
+	parent_process(pfd, av);
+	while(1);
 }
