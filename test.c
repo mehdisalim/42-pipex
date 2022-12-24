@@ -1,34 +1,51 @@
 #include <unistd.h>
+#include <string.h>
 #include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
-int main(int argc, char *argv[]) {
-  int fds[2];      				    // an array that will hold two file descriptors
-  pipe(fds);                       // populates fds with two file descriptors
-  pid_t pid = fork();              // create child process that is a clone of the parent
-  
-  if (pid == 0) {                  // if pid == 0, then this is the child process
-    dup2(fds[0], STDIN_FILENO);    // fds[0] (the read end of pipe) donates its data to file descriptor 0
-    close(fds[0]);                 // file descriptor no longer needed in child since stdin is a copy
-    close(fds[1]);                 // file descriptor unused in child
-    char *argv[] = {(char *)"uniq", NULL};   // create argument vector
-    if (execvp(argv[0], argv) < 0) exit(0);  // run sort command (exit if something went wrong)
-  } 
+void	child_process(int pfd[2], char **av)
+{
+	char *command[] = {"/bin/bash", "-c", av[2], 0};
+	close(pfd[0]);
+	int fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		exit(0);
+	dup2(fd, STDIN_FILENO);
+	dup2(pfd[1], STDOUT_FILENO);
+	execve(command[0], command, 0);
+	close(fd);
+	exit(0);
+}
 
-  // if we reach here, we are in parent process
-  close(fds[0]);                 // file descriptor unused in parent
-  const char *words[] = {"pear", "peach", "pear", "apple"};
-  // write input to the writable file descriptor so it can be read in from child:
-  size_t numwords = sizeof(words)/sizeof(words[0]);
-  for (size_t i = 0; i < numwords; i++) {
-    dprintf(fds[1], "%s\n", words[i]); 
-  }
+void	parent_process(int pfd[2], char	**av)
+{
+	char	*command[] = {"/bin/bash", "-c", av[3], NULL};
+	close(pfd[1]);
+//	close(STDOUT_FILENO);
+	int fd = open(av[4], O_WRONLY | O_CREAT, 0777);
+	if (fd == -1)
+	{
+		printf("fd is equal -1");
+		exit(0);
+	}
+//	dup(fd);
+	dup2(pfd[0], STDIN_FILENO);
+	dup2(fd, STDOUT_FILENO);
+	execve(command[0], command, 0);
+	close(fd);
+}
 
-  // send EOF so child can continue (child blocks until all input has been processed):
-  close(fds[1]); 
+int	main(int argc, char *av[])
+{
+	int pfd[2];
+	pipe(pfd);
 
-  /*int status;
-  pid_t wpid = waitpid(pid, &status, 0); // wait for child to finish before exiting
-  return wpid == pid && WIFEXITED(status) ? WEXITSTATUS(status) : -1;*/
+	int pid = fork();
+	if (pid == 0)
+		child_process(pfd, av);
+	wait(NULL);
+	parent_process(pfd, av);
+	while(1);
 }
