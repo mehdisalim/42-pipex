@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:42:47 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/07 17:17:39 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:53:55 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 void	ft_putnbr_fd(int nb, int fd)
 {

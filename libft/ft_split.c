@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 19:28:49 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/07 18:44:06 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:54:22 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	sep_count(char const *s, char c)
 {

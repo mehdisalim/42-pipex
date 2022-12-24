@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 12:32:46 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/07 12:43:19 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:56:17 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 13:15:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:50:39 by esalim           ###   ########.fr       */
+/*   Created: 2022/12/24 16:37:35 by esalim            #+#    #+#             */
+/*   Updated: 2022/12/24 16:39:36 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../include/pipex.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	exit_with_error(char *message)
 {
-	if (!lst)
-		return (0);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	ft_printf("Error : %s\n", message);
+	exit(1);
 }
+

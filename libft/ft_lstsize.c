@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 12:09:58 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/10 20:25:39 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:52:01 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	ft_lstsize(t_list *lst)
 {

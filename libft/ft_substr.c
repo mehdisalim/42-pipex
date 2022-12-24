@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:19:21 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/10 19:54:12 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:57:26 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

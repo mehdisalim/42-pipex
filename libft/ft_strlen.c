@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:17:10 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/02 14:50:06 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:55:58 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 size_t	ft_strlen(const char *str)
 {

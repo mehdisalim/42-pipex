@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:38:59 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/06 22:30:26 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:49:14 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	nbrlength(int nbr)
 {

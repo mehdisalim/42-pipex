@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/24 14:46:50 by esalim            #+#    #+#              #
-#    Updated: 2022/12/24 15:45:26 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/24 17:01:09 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	pipex
 
 CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra
-SRC		=	main.c
+SRC		=	src/main.c
 OBJ		=	${SRC:.c=.o}
 RM		=	rm -f
 
