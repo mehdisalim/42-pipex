@@ -37,8 +37,9 @@ void	parent_process(int pfd[2], char	**av)
 	close(fd);
 }
 
-int	main(int argc, char *av[])
+int	main(int ac, char *av[])
 {
+	(void) ac;
 	int pfd[2];
 	pipe(pfd);
 
