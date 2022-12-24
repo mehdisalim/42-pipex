@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 12:59:48 by esalim            #+#    #+#              #
-#    Updated: 2022/12/24 15:37:40 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/24 18:27:30 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,15 @@ RM = rm
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^
+	@$(CC) $(CFLAGS) -c $^
 
 fclean: clean
-	$(RM) -rf $(NAME)
+	@$(RM) -rf $(NAME)
 
 clean:
-	$(RM) -rf $(OBJS)
+	@$(RM) -rf $(OBJS)
 
 re: fclean all

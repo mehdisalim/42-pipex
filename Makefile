@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/24 14:46:50 by esalim            #+#    #+#              #
-#    Updated: 2022/12/24 17:01:09 by esalim           ###   ########.fr        #
+#    Updated: 2022/12/24 19:33:52 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	pipex
 
 CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra
-SRC		=	src/main.c
+SRC		=	src/main.c src/error.c src/pipex_utils.c
 OBJ		=	${SRC:.c=.o}
 RM		=	rm -f
 
@@ -33,7 +33,7 @@ run		: $(NAME)
 	./$(NAME) infile "cat" "grep me" outfile
 
 %.o		:	%.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) -c $^ -o $@
 
 clean	:
 	$(MAKE) $(LIBFT) clean
