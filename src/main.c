@@ -6,12 +6,12 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/25 15:16:25 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/25 18:04:54 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-
+/*
 char	**sep_cmd(char *s)
 {
 	char	**cmds;
@@ -30,12 +30,12 @@ char	**sep_cmd(char *s)
 		cmds[2] = 0;
 	return (cmds);
 }
-
+*/
 void	child_process(int pfd[2], char **av)
 {
 	char	**commands;
 
-	commands = sep_cmd(av[2]);
+	commands = split_commands(av[2]);
 	close(pfd[0]);
 	int fd = open(av[1], O_RDONLY);
 	if (fd == -1)
@@ -54,7 +54,7 @@ void	parent_process(int pfd[2], char	**av)
 {
 	char	**commands;
 
-	commands = sep_cmd(av[3]);
+	commands = split_commands(av[3]);
 	close(pfd[1]);
 	int fd = open(av[4], O_WRONLY | O_CREAT, 0666);
 	if (fd == -1)
