@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/25 18:08:34 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/25 18:59:28 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_cmd_path(char	*cmd)
 	if (bin != -1 )
 		return (command_path);
 	perror("Error");
-	exit(1);
+	exit(2);
 }
 
 char	**split_commands(char *cmds)
