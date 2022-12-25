@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:42:23 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 19:33:07 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/25 15:16:59 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <fcntl.h>
 # include "libft.h"
 # include "ft_printf.h"
