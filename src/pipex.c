@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/25 18:59:01 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/26 11:04:41 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**sep_cmd(char *s)
 	return (cmds);
 }
 */
-void	child_process(int pfd[2], char **av)
+void	child_process(int pfd[2], char **av, char **ev)
 {
 	char	**commands;
 
@@ -50,12 +50,13 @@ void	child_process(int pfd[2], char **av)
 	}
 	dup2(fd, STDIN_FILENO);
 	dup2(pfd[1], STDOUT_FILENO);
+	(void)ev;
 	execve(commands[0], commands, 0);
 	close(fd);
 	exit(0);
 }
 
-void	parent_process(int pfd[2], char	**av)
+void	parent_process(int pfd[2], char	**av, char **ev)
 {
 	char	**commands;
 
@@ -74,11 +75,12 @@ void	parent_process(int pfd[2], char	**av)
 	}
 	dup2(pfd[0], STDIN_FILENO);
 	dup2(fd, STDOUT_FILENO);
+	(void)ev;
 	execve(commands[0], commands, 0);
 	close(fd);
 }
 
-void	pipex(char **av)
+void	pipex(char **av, char **ev)
 {
 
 	int pfd[2];
@@ -94,14 +96,17 @@ void	pipex(char **av)
 		exit(-1);
 	}
 	if (pid == 0)
-		child_process(pfd, av);
+		child_process(pfd, av, ev);
 	wait(NULL);
-	parent_process(pfd, av);
+	parent_process(pfd, av, ev);
 }
 
-int	main(int ac, char *av[])
+int	main(int ac, char *av[], char **ev)
 {
 	if (ac < 5)
-		exit_with_error("the argemments most be 4 (infile cmd cmd outfile)");
-	pipex(av);
+	{
+		ft_printf("the argemments most be 4 (infile cmd cmd outfile)");
+		exit(1);
+	}
+	pipex(av, ev);
 }

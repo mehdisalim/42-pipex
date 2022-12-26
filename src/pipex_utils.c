@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/25 18:59:28 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/26 10:57:25 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	*get_cmd_path(char	*cmd)
 	bin = access(command_path, F_OK);
 	if (bin != -1 )
 		return (command_path);
-	perror("Error");
 	exit(2);
 }
 
