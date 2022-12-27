@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:42:23 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/26 10:35:51 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/27 18:20:23 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 void	pipex(char	**av, char **ev);
 void	exit_with_error(char *message);
-char	*get_cmd_path(char	*cmd);
-char	**split_commands(char *cmd);
+char	*get_cmd_path(char	*cmd, char **env);
+char	**split_commands(char *cmd, char **env);
 
 #endif
