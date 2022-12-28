@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/28 13:26:19 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/28 17:21:51 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	child_process(int pfd[2], char **av, char **ev)
 
 	commands = split_commands(av[2], ev);
 	close(pfd[0]);
-	if (access(av[1], F_OK) == -1)
+	if (access(av[1], R_OK) == -1)
 	{
 	  write(2, "Error:  No such file or directory", 33);
 	  exit(1);
@@ -43,12 +43,7 @@ void	parent_process(int pfd[2], char	**av, char **ev)
 
 	commands = split_commands(av[3], ev);
 	close(pfd[1]);
-	if (!access(av[4], F_OK) && unlink(av[4]) == -1)
-	{
-	  write(2, "Error:  No such file or directory", 33);
-	  exit(1);
-	}
-	int fd = open(av[4], O_WRONLY | O_CREAT, 0666);
+	int fd = open(av[4], O_TRUNC | O_CREAT | O_RDWR, 0666);
 	if (fd == -1)
 	{
 		write(2, "Error:  No such file or directory", 33);
@@ -82,11 +77,11 @@ void	pipex(char **av, char **ev)
 	parent_process(pfd, av, ev);
 }
 
-int	main(int ac, char *av[], char **ev)
+int	main(int ac, char *av[], char *ev[])
 {
 	if (ac < 5)
 	{
-		ft_printf("the argemments most be 4 (infile cmd cmd outfile)");
+		exit_with_error("the argemments most be 4 (infile cmd cmd outfile)", 127);
 		exit(1);
 	}
 //	int i = -1;

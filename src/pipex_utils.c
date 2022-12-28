@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/27 18:38:46 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/28 17:17:14 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ char	*get_cmd_path(char	*cmd, char **env)
 		tmp = ft_strjoin(paths[i], "/");
 		command_path = ft_strjoin(tmp, cmd);
 		free(tmp);
-		if (access(command_path, F_OK) != -1)
+		if (access(command_path, X_OK) != -1)
 			return (command_path);
 		free(command_path);
 		i++;
 	}
-	perror("Error");
+	//perror("Error");
+	write(2, "Error:  No such file or directory", 33);
 	exit(127);
 }
 
