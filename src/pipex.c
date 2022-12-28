@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/27 18:34:58 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/28 13:26:19 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ void	child_process(int pfd[2], char **av, char **ev)
 	close(pfd[0]);
 	if (access(av[1], F_OK) == -1)
 	{
-	  perror("Error");
-	  exit(2);
+	  write(2, "Error:  No such file or directory", 33);
+	  exit(1);
 	}
 	int fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error");
-		exit(1);
+		write(2, "Error:  No such file or directory", 33);
+	   	exit(1);
 	}
 	dup2(fd, STDIN_FILENO);
 	dup2(pfd[1], STDOUT_FILENO);
-	if (execve(commands[0], commands, 0) != -1)
-		perror("Error");
+	if (execve(commands[0], commands, 0) != -1)	
+		write(2, "Execve error", 12);
 	close(fd);
 	exit(0);
 }
@@ -45,19 +45,19 @@ void	parent_process(int pfd[2], char	**av, char **ev)
 	close(pfd[1]);
 	if (!access(av[4], F_OK) && unlink(av[4]) == -1)
 	{
-	  perror("Error");
-	  exit(2);
+	  write(2, "Error:  No such file or directory", 33);
+	  exit(1);
 	}
 	int fd = open(av[4], O_WRONLY | O_CREAT, 0666);
 	if (fd == -1)
 	{
-		perror("Error");
-		exit(1);
+		write(2, "Error:  No such file or directory", 33);
+	   	exit(1);
 	}
 	dup2(pfd[0], STDIN_FILENO);
 	dup2(fd, STDOUT_FILENO);
 	if (execve(commands[0], commands, ev) != -1)
-		perror("Error");
+		write(2, "Execve error", 12);
 	close(fd);
 }
 
