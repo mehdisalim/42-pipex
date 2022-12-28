@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/28 17:21:51 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/28 17:52:16 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	child_process(int pfd[2], char **av, char **ev)
 	if (fd == -1)
 	{
 		write(2, "Error:  No such file or directory", 33);
-	   	exit(1);
+	   	exit(126);
 	}
 	dup2(fd, STDIN_FILENO);
 	dup2(pfd[1], STDOUT_FILENO);
@@ -47,7 +47,7 @@ void	parent_process(int pfd[2], char	**av, char **ev)
 	if (fd == -1)
 	{
 		write(2, "Error:  No such file or directory", 33);
-	   	exit(1);
+	   	exit(126);
 	}
 	dup2(pfd[0], STDIN_FILENO);
 	dup2(fd, STDOUT_FILENO);

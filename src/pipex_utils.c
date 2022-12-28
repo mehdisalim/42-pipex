@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/28 17:17:14 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/28 18:03:09 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ char	*get_cmd_path(char	*cmd, char **env)
 		i++;
 	}
 	//perror("Error");
-	write(2, "Error:  No such file or directory", 33);
-	exit(127);
+	exit_with_error("Error: Command not found", 127);
+	return (0);
 }
 
 char	**split_commands(char *cmds, char **env)
