@@ -6,13 +6,13 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/28 18:03:09 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/29 11:58:11 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-char	**get_env_path(char **env)
+char	**get_env_path(char *env[])
 {
 	char	**paths;
 	int		i;
@@ -57,7 +57,7 @@ char	**sep_cmd(char *s)
 	return (cmds);
 }
 
-char	*get_cmd_path(char	*cmd, char **env)
+char	*get_cmd_path(char	*cmd, char *env[])
 {
 	char	*command_path;
 	int		i;
@@ -78,12 +78,10 @@ char	*get_cmd_path(char	*cmd, char **env)
 		free(command_path);
 		i++;
 	}
-	//perror("Error");
-	exit_with_error("Error: Command not found", 127);
 	return (0);
 }
 
-char	**split_commands(char *cmds, char **env)
+char	**split_commands(char *cmds, char *env[])
 {
 	char	**commands;
 	char	*cmd_path;

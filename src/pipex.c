@@ -6,13 +6,13 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/28 17:52:16 by esalim           ###   ########.fr       */
+/*   Updated: 2022/12/28 18:41:27 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	child_process(int pfd[2], char **av, char **ev)
+void	child_process(int pfd[2], char **av, char *ev[])
 {
 	char	**commands;
 
@@ -37,7 +37,7 @@ void	child_process(int pfd[2], char **av, char **ev)
 	exit(0);
 }
 
-void	parent_process(int pfd[2], char	**av, char **ev)
+void	parent_process(int pfd[2], char	**av, char *ev[])
 {
 	char	**commands;
 
@@ -56,7 +56,7 @@ void	parent_process(int pfd[2], char	**av, char **ev)
 	close(fd);
 }
 
-void	pipex(char **av, char **ev)
+void	pipex(char **av, char *ev[])
 {
 
 	int pfd[2];
@@ -69,21 +69,23 @@ void	pipex(char **av, char **ev)
 	if (pid == -1)
 	{
 		perror("Error");
-		exit(-1);
+		exit(1);
 	}
 	if (pid == 0)
 		child_process(pfd, av, ev);
 	wait(NULL);
 	parent_process(pfd, av, ev);
+	close(pfd[0]);
+	close(pfd[1]);
 }
 
 int	main(int ac, char *av[], char *ev[])
 {
 	if (ac < 5)
-	{
 		exit_with_error("the argemments most be 4 (infile cmd cmd outfile)", 127);
-		exit(1);
-	}
+
+
+//	char	ev[5][255] = {"PATH=usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/esalim/.fzf/bin", "LC_TERMINAL=iTerm2", "COLORTERM=truecolor", {0}};
 //	int i = -1;
 //	while (ev[++i])
 //		ft_printf("%s\n", ev[i]);
