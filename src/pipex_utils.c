@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/29 11:58:11 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/13 17:44:18 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char	**get_env_path(char *env[])
 	i = -1;
 	while (env[++i])
 	{
-		path = ft_strnstr(env[i], "PATH=", ft_strlen(env[i]));
+		path = ft_strnstr(env[i], "PATH=", 5);
 		if (path)
 			break ;
 	}
 	if (!path)
-		exit(1);
+		return (ft_split("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", ':'));
 	paths = ft_split(path + 5, ':');
 	if (!paths)
 		exit(1);
@@ -45,7 +45,7 @@ char	**sep_cmd(char *s)
 	if (!cmds)
 		exit(0);
 	while (s[++i])
-		if (s[i] == ' ')
+		if (s[i] == ' ' || s[i] == '\t')
 			break ;
 	cmds[0] = ft_substr(s, 0, i);
 	if (i != len)
@@ -78,6 +78,8 @@ char	*get_cmd_path(char	*cmd, char *env[])
 		free(command_path);
 		i++;
 	}
+	//perror("Error");
+	exit_with_error("Error: Command not found", 127);
 	return (0);
 }
 

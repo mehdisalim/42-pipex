@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/28 18:41:27 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/13 23:08:26 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	child_process(int pfd[2], char **av, char *ev[])
 	close(pfd[0]);
 	if (access(av[1], R_OK) == -1)
 	{
-	  write(2, "Error:  No such file or directory", 33);
+	  write(2, "Error: No such file or directory", 33);
 	  exit(1);
 	}
 	int fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		write(2, "Error:  No such file or directory", 33);
+		write(2, "Error: No such file or directory", 33);
 	   	exit(126);
 	}
 	dup2(fd, STDIN_FILENO);
@@ -73,7 +73,6 @@ void	pipex(char **av, char *ev[])
 	}
 	if (pid == 0)
 		child_process(pfd, av, ev);
-	wait(NULL);
 	parent_process(pfd, av, ev);
 	close(pfd[0]);
 	close(pfd[1]);
@@ -83,7 +82,6 @@ int	main(int ac, char *av[], char *ev[])
 {
 	if (ac < 5)
 		exit_with_error("the argemments most be 4 (infile cmd cmd outfile)", 127);
-
 
 //	char	ev[5][255] = {"PATH=usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/esalim/.fzf/bin", "LC_TERMINAL=iTerm2", "COLORTERM=truecolor", {0}};
 //	int i = -1;
