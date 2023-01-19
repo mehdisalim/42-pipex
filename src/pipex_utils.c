@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2023/01/19 17:49:56 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:53:48 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,18 @@ char	**sep_cmd(char *s)
 	return (cmds);
 }
 
+char    *remove_end_space(char *cmd)
+{
+    int i = 0;
+    while (cmd[i])
+    {
+        if (cmd[i] == ' ')
+            cmd[i] = 0;
+        i++;
+    }
+    return (cmd);
+}
+
 char	*get_cmd_path(char	*cmd, char *env[])
 {
 	char	*command_path;
@@ -73,49 +85,51 @@ char	*get_cmd_path(char	*cmd, char *env[])
     }
 	paths = get_env_path(env);
 	i = 0;
+    char    *str = remove_end_space(cmd);
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/");
-		command_path = ft_strjoin(tmp, cmd);
+		command_path = ft_strjoin(tmp, str);
 		free(tmp);
 		if (access(command_path, F_OK | X_OK) != -1)
 			return (command_path);
 		free(command_path);
 		i++;
 	}
-	ft_printf("pipex: %s: Command not found\n", ft_strrchr(cmd, '/'));
-	exit(127);
 	return (0);
 }
 
-char	**split_commands(char *cmds, char *env[])
+char	**split_commands(char *command, char *env[])
 {
 	char	**commands;
 	char	*cmd_path;
-    char    *tmp;
+    char    *cmds = ft_strdup(command);
+    int i = 0;
 
+    while (cmds[i])
+    {
+        if (cmds[i] == 34 && cmds[i + 1] && cmds[i + 1] == 39)
+            cmds[i] = 39;
+        else if (cmds[i] == 39 && cmds[i + 1] && cmds[i + 1] == 34)
+            cmds[i] = 34;
+       i++; 
+    }
     if (ft_strchr(cmds, 34))
-    {
         commands = ft_split(cmds, 34);
-        tmp = ft_strtrim(commands[0], " ");
-        free(commands[0]);
-        commands[0] = tmp;
-        free(tmp);
-    }
     else if (ft_strchr(cmds, 39))
-    {
         commands = ft_split(cmds, 39);
-        tmp = ft_strtrim(commands[0], " ");
-        free(commands[0]);
-        commands[0] = tmp;
-        free(tmp);
-    }
-//    else
-//        commands = sep_cmd(cmds);
     else
         commands = ft_split(cmds, ' ');
+    ft_printf("#%s#\n", commands[0]);
+    ft_printf("#%s#\n", commands[1]);
+    ft_printf("#%s#\n", commands[2]);
 	cmd_path = get_cmd_path(commands[0], env);
-    ft_printf("\n|%s|\n", cmd_path);
+    if (!cmd_path)
+    {
+	    ft_printf("pipex: %s: Command not found\n", commands[0]);
+        exit(126);
+    }
+    //ft_printf("\n|%s|\n", cmd_path);
 	free(commands[0]);
 	commands[0] = ft_strdup(cmd_path);
 	free(cmd_path);
