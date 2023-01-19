@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2023/01/13 17:44:18 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/19 17:49:56 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,13 @@ char	*get_cmd_path(char	*cmd, char *env[])
 	char	**paths;
 	char	*tmp;
 
-	if (ft_strnstr(cmd, "bin", ft_strlen(cmd)) != 0)
-		return (cmd);
+	if (ft_strnstr(cmd, "./", ft_strlen(cmd)) != 0 || ft_strnstr(cmd, "/bin", ft_strlen(cmd)) != 0)
+    {
+		if (access(cmd, F_OK | X_OK) != -1)
+	    	return (cmd);
+		ft_printf("pipex: %s: permission denied\n", cmd);
+	  	exit(126);
+    }
 	paths = get_env_path(env);
 	i = 0;
 	while (paths[i])
@@ -73,13 +78,13 @@ char	*get_cmd_path(char	*cmd, char *env[])
 		tmp = ft_strjoin(paths[i], "/");
 		command_path = ft_strjoin(tmp, cmd);
 		free(tmp);
-		if (access(command_path, X_OK) != -1)
+		if (access(command_path, F_OK | X_OK) != -1)
 			return (command_path);
 		free(command_path);
 		i++;
 	}
-	//perror("Error");
-	exit_with_error("Error: Command not found", 127);
+	ft_printf("pipex: %s: Command not found\n", ft_strrchr(cmd, '/'));
+	exit(127);
 	return (0);
 }
 
@@ -87,9 +92,30 @@ char	**split_commands(char *cmds, char *env[])
 {
 	char	**commands;
 	char	*cmd_path;
+    char    *tmp;
 
-	commands = sep_cmd(cmds);
+    if (ft_strchr(cmds, 34))
+    {
+        commands = ft_split(cmds, 34);
+        tmp = ft_strtrim(commands[0], " ");
+        free(commands[0]);
+        commands[0] = tmp;
+        free(tmp);
+    }
+    else if (ft_strchr(cmds, 39))
+    {
+        commands = ft_split(cmds, 39);
+        tmp = ft_strtrim(commands[0], " ");
+        free(commands[0]);
+        commands[0] = tmp;
+        free(tmp);
+    }
+//    else
+//        commands = sep_cmd(cmds);
+    else
+        commands = ft_split(cmds, ' ');
 	cmd_path = get_cmd_path(commands[0], env);
+    ft_printf("\n|%s|\n", cmd_path);
 	free(commands[0]);
 	commands[0] = ft_strdup(cmd_path);
 	free(cmd_path);

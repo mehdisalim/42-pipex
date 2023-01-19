@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2023/01/13 23:08:26 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/19 12:59:39 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,26 @@ void	child_process(int pfd[2], char **av, char *ev[])
 
 	commands = split_commands(av[2], ev);
 	close(pfd[0]);
+	if (access(av[1], F_OK) == -1)
+	{
+	  ft_printf("pipex: %s: No such file or directory\n", av[1]);
+	  exit(1);
+	}
 	if (access(av[1], R_OK) == -1)
 	{
-	  write(2, "Error: No such file or directory", 33);
-	  exit(1);
+	  ft_printf("pipex: %s: permission denied\n", av[1]);
+	  exit(126);
 	}
 	int fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		write(2, "Error: No such file or directory", 33);
+		ft_printf("pipex: %s: permission denied\n", av[1]);
 	   	exit(126);
 	}
 	dup2(fd, STDIN_FILENO);
 	dup2(pfd[1], STDOUT_FILENO);
 	if (execve(commands[0], commands, 0) != -1)	
-		write(2, "Execve error", 12);
+		ft_printf("pipex: execve fiald\n", 12);
 	close(fd);
 	exit(0);
 }
@@ -46,13 +51,13 @@ void	parent_process(int pfd[2], char	**av, char *ev[])
 	int fd = open(av[4], O_TRUNC | O_CREAT | O_RDWR, 0666);
 	if (fd == -1)
 	{
-		write(2, "Error:  No such file or directory", 33);
+		ft_printf("pipex: open fiald\n", av[4]);
 	   	exit(126);
 	}
 	dup2(pfd[0], STDIN_FILENO);
 	dup2(fd, STDOUT_FILENO);
 	if (execve(commands[0], commands, ev) != -1)
-		write(2, "Execve error", 12);
+		ft_printf("pipex: execve fiald\n", 12);
 	close(fd);
 }
 
@@ -62,13 +67,13 @@ void	pipex(char **av, char *ev[])
 	int pfd[2];
 	if (pipe(pfd) == -1)
 	{
-		perror("Error");
-		exit(-1);
+		ft_printf("Error: Pipe faild\n");
+		exit(1);
 	}
 	int pid = fork();
 	if (pid == -1)
 	{
-		perror("Error");
+		ft_printf("Error: fork faild\n");
 		exit(1);
 	}
 	if (pid == 0)
