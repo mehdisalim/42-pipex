@@ -6,13 +6,13 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 16:02:29 by esalim            #+#    #+#             */
-/*   Updated: 2023/01/19 12:59:39 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/20 19:48:37 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	child_process(int pfd[2], char **av, char *ev[])
+void	child_process(int pfd[2], char **av, char **ev)
 {
 	char	**commands;
 
@@ -36,32 +36,43 @@ void	child_process(int pfd[2], char **av, char *ev[])
 	}
 	dup2(fd, STDIN_FILENO);
 	dup2(pfd[1], STDOUT_FILENO);
-	if (execve(commands[0], commands, 0) != -1)	
+	if (execve(commands[0], commands, ev) != -1)	
 		ft_printf("pipex: execve fiald\n", 12);
 	close(fd);
 	exit(0);
 }
 
-void	parent_process(int pfd[2], char	**av, char *ev[])
+char *get_path(char ***command)
+{
+    char *str = ft_strrchr(*command[0], '/');
+    str += 1;
+    char *path = ft_strdup(*command[0]);
+    free(*command[0]);
+    *command[0] = ft_strdup(str);
+    return (path);
+}
+
+void	parent_process(int pfd[2], char	**av, char **ev)
 {
 	char	**commands;
 
-	commands = split_commands(av[3], ev);
 	close(pfd[1]);
 	int fd = open(av[4], O_TRUNC | O_CREAT | O_RDWR, 0666);
+	commands = split_commands(av[3], ev);
 	if (fd == -1)
 	{
 		ft_printf("pipex: open fiald\n", av[4]);
-	   	exit(126);
+	   	exit(1);
 	}
 	dup2(pfd[0], STDIN_FILENO);
 	dup2(fd, STDOUT_FILENO);
-	if (execve(commands[0], commands, ev) != -1)
+    char *path = get_path(&commands);
+	if (execve(path, commands, ev) != -1)
 		ft_printf("pipex: execve fiald\n", 12);
 	close(fd);
 }
 
-void	pipex(char **av, char *ev[])
+void	pipex(char **av, char **ev)
 {
 
 	int pfd[2];
@@ -86,11 +97,11 @@ void	pipex(char **av, char *ev[])
 int	main(int ac, char *av[], char *ev[])
 {
 	if (ac < 5)
-		exit_with_error("the argemments most be 4 (infile cmd cmd outfile)", 127);
+    {
+		ft_printf("the argemments most be 4 (infile cmd cmd outfile)");
+        exit(1);
+    }
 
-//	char	ev[5][255] = {"PATH=usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/esalim/.fzf/bin", "LC_TERMINAL=iTerm2", "COLORTERM=truecolor", {0}};
-//	int i = -1;
-//	while (ev[++i])
-//		ft_printf("%s\n", ev[i]);
 	pipex(av, ev);
+    exit(0);
 }
