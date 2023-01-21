@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:30:04 by esalim            #+#    #+#             */
-/*   Updated: 2023/01/21 12:57:22 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 13:11:41 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*get_cmd_path(char	*cmd, char **env)
 	char	*tmp;
 	char	*str;
 
-	if (ft_strnstr(cmd, "/", ft_strlen(cmd)) != 0)
+	if (ft_strchr(cmd, '/') != 0)
 	{
 		if (access(cmd, F_OK & X_OK & R_OK) != -1)
 			return (cmd);
