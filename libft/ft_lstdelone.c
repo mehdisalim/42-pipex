@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 00:08:32 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:50:11 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:50:34 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {

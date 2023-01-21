@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:48:59 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:49:45 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:50:33 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   pipex_utils.c									  :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: esalim <esalim@student.42.fr>			  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/12/24 19:30:32 by esalim			#+#	#+#			 */
-/*   Updated: 2023/01/21 13:14:49 by esalim		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/21 12:30:04 by esalim            #+#    #+#             */
+/*   Updated: 2023/01/21 14:59:31 by esalim           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
-char	**get_env_path(char **env)
+static char	**get_env_path(char **env)
 {
 	char	**paths;
 	int		i;
@@ -35,7 +35,7 @@ char	**get_env_path(char **env)
 	return (paths);
 }
 
-char	*remove_end_space(char *cmd)
+static char	*remove_end_space(char *cmd)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ char	*remove_end_space(char *cmd)
 	return (cmd);
 }
 
-char	*get_cmd_path(char	*cmd, char **env)
+static char	*get_cmd_path(char	*cmd, char **env)
 {
 	char	*command_path;
 	int		i;
@@ -62,6 +62,7 @@ char	*get_cmd_path(char	*cmd, char **env)
 		if (access(cmd, F_OK & X_OK & R_OK) != -1)
 			return (cmd);
 		ft_printf("pipex: %s: permission denied\n", cmd);
+		free(cmd);
 		exit(126);
 	}
 	paths = get_env_path(env);
@@ -73,14 +74,17 @@ char	*get_cmd_path(char	*cmd, char **env)
 		command_path = ft_strjoin(tmp, str);
 		free(tmp);
 		if (access(command_path, F_OK | X_OK) != -1)
+		{
+			free_paths(paths);
 			return (command_path);
+		}
 		free(command_path);
 		i++;
 	}
 	return (0);
 }
 
-char	get_separator(char *cmd)
+static char	get_separator(char *cmd)
 {
 	int	i;
 
@@ -100,16 +104,19 @@ char	**split_commands(char *cmds, char **env)
 {
 	char	**commands;
 	char	*cmd_path;
-	char sep = get_separator(cmds);
+	char	sep;
+
+	sep = get_separator(cmds);
 	commands = ft_split(cmds, sep);
 	cmd_path = get_cmd_path(commands[0], env);
 	if (!cmd_path)
 	{
 		ft_printf("pipex: %s: command not found\n", commands[0]);
+		free_paths(commands);
 		exit(127);
 	}
 	free(commands[0]);
 	commands[0] = ft_strdup(cmd_path);
-	// free(cmd_path);
+	free(cmd_path);
 	return (commands);
 }

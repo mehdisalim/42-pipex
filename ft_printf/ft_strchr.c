@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:53:18 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 17:00:15 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:53:02 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 char	*ft_strchr(const char *str, int c)
 {

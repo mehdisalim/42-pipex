@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:16:59 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:46:54 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:50:28 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {

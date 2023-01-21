@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 18:43:45 by esalim            #+#    #+#              #
-#    Updated: 2022/12/24 18:27:07 by esalim           ###   ########.fr        #
+#    Updated: 2023/01/21 14:52:29 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ BONUSOBJS = $(BONUSFILES:.c=.o)
 
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror 
-NAME	= ../libs/libft.a
+NAME	= libft.a
 
 all: 	$(NAME)
 

@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:15:53 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:59:04 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:53:00 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 static void	ft_puthexa(char c, va_list lst, int *count)
 {

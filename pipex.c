@@ -10,9 +10,9 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
-void	child_process(int pfd[2], char **av, char **ev)
+static void	child_process(int pfd[2], char **av, char **ev)
 {
 	char	**commands;
 	int		fd;
@@ -40,11 +40,12 @@ void	child_process(int pfd[2], char **av, char **ev)
 		free_paths(commands);
 		exit(1);
 	}
+	free_paths(commands);
 	close(fd);
 	exit(0);
 }
 
-char	*get_path(char ***command)
+static char	*get_path(char ***command)
 {
 	char	*str;
 	char	*path;
@@ -57,7 +58,7 @@ char	*get_path(char ***command)
 	return (path);
 }
 
-void	parent_process(int pfd[2], char	**av, char **ev)
+static void	parent_process(int pfd[2], char	**av, char **ev)
 {
 	char	**commands;
 	char	*path;
@@ -80,6 +81,7 @@ void	parent_process(int pfd[2], char	**av, char **ev)
 		free_paths(commands);
 		exit(1);
 	}
+	free_paths(commands);
 	close(fd);
 }
 
@@ -114,5 +116,5 @@ int	main(int ac, char *av[], char *ev[])
 		exit(1);
 	}
 	pipex(av, ev);
-	exit(0);
+	return (0);
 }

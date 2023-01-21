@@ -6,22 +6,24 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 17:07:06 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:57:10 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:56:39 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
-char *ft_strtrim(char const *s, char const *set)
+char	*ft_strtrim(char const *s, char const *set)
 {
-	char *dest;
+	char	*dest;
+	size_t	i;
+	size_t	len;
 
-	size_t i = 0;
+	i = 0;
 	if (!s)
 		return (0);
 	while (ft_strchr((char *)set, *s))
 		s++;
-	size_t len = ft_strlen(s) - 1;
+	len = ft_strlen(s) - 1;
 	while (ft_strchr((char *)set, s[len]))
 		len--;
 	dest = malloc (len + 1);
@@ -35,60 +37,3 @@ char *ft_strtrim(char const *s, char const *set)
 	dest[i] = 0;
 	return (dest);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	size_t	i;
-
-	if (!s1 || !set)
-		return (0);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	i = ft_strlen(s1);
-	while (i && ft_strchr(set, s1[i]))
-		i--;
-	return (ft_substr(s1, 0, i + 1));
-}
-*/

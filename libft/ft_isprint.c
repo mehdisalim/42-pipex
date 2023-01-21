@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:31:36 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:48:58 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:51:02 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_isprint(int c)
 {

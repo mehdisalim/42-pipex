@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:07:08 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:55:44 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:50:44 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t n)
 {

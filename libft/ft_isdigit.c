@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:31:36 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:48:41 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:50:32 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

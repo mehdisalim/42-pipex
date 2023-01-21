@@ -6,11 +6,11 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:08:26 by esalim            #+#    #+#             */
-/*   Updated: 2022/12/24 16:56:58 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 14:50:46 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 char	*ft_strrchr(const char *str, int c)
 {

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   free_leaks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:41:24 by esalim            #+#    #+#             */
-/*   Updated: 2022/10/19 12:12:25 by esalim           ###   ########.fr       */
+/*   Created: 2023/01/21 14:57:58 by esalim            #+#    #+#             */
+/*   Updated: 2023/01/21 14:58:03 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "pipex.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+void	free_paths(char **paths)
+{
+	int	i;
 
-char	*ft_strchr(const char *str, int c);
-void	ft_putchar(char c, int *count);
-void	ft_putstr(char *str, int *count);
-void	ft_putnbr(long nbr, int isunsigned, int *count);
-void	ft_putnbr_base(long nbr, char *base, int islong, int *count);
-int		ft_printf(const char *str, ...);
-
-#endif
+	if (!paths)
+		return ;
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+	free(paths);
+}
