@@ -6,7 +6,7 @@
 #    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/24 14:46:50 by esalim            #+#    #+#              #
-#    Updated: 2023/01/21 14:48:53 by esalim           ###   ########.fr        #
+#    Updated: 2023/01/21 15:25:01 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	pipex
 
 CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra
-SRC		=	pipex.c pipex_utils.c free_leaks.c
+SRC		=	pipex.c pipex_utils.c utils.c
 OBJ		=	${SRC:.c=.o}
 RM		=	rm -f
 
