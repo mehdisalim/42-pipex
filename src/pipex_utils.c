@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/21 12:30:04 by esalim            #+#    #+#             */
-/*   Updated: 2023/01/21 13:11:41 by esalim           ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   pipex_utils.c									  :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: esalim <esalim@student.42.fr>			  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2022/12/24 19:30:32 by esalim			#+#	#+#			 */
+/*   Updated: 2023/01/21 13:14:49 by esalim		   ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
@@ -62,7 +62,6 @@ char	*get_cmd_path(char	*cmd, char **env)
 		if (access(cmd, F_OK & X_OK & R_OK) != -1)
 			return (cmd);
 		ft_printf("pipex: %s: permission denied\n", cmd);
-		free(cmd);
 		exit(126);
 	}
 	paths = get_env_path(env);
@@ -101,19 +100,16 @@ char	**split_commands(char *cmds, char **env)
 {
 	char	**commands;
 	char	*cmd_path;
-	char	sep;
-
-	sep = get_separator(cmds);
+	char sep = get_separator(cmds);
 	commands = ft_split(cmds, sep);
 	cmd_path = get_cmd_path(commands[0], env);
 	if (!cmd_path)
 	{
 		ft_printf("pipex: %s: command not found\n", commands[0]);
-		free_paths(commands);
 		exit(127);
 	}
 	free(commands[0]);
 	commands[0] = ft_strdup(cmd_path);
-	free(cmd_path);
+	// free(cmd_path);
 	return (commands);
 }
