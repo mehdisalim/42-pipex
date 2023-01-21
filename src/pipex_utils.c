@@ -6,7 +6,7 @@
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:30:32 by esalim            #+#    #+#             */
-/*   Updated: 2023/01/21 11:38:14 by esalim           ###   ########.fr       */
+/*   Updated: 2023/01/21 12:11:54 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_cmd_path(char	*cmd, char **env)
 	char	**paths;
 	char	*tmp;
 
-	if (ft_strnstr(cmd, "./", ft_strlen(cmd)) != 0 || ft_strnstr(cmd, "/bin", ft_strlen(cmd)) != 0)
+	if (ft_strnstr(cmd, "/", ft_strlen(cmd)) != 0)
     {
 		if (access(cmd, F_OK & X_OK & R_OK) != -1)
 	    	return (cmd);
@@ -80,9 +80,9 @@ char    get_separator(char *cmd)
     int i = 0;
     while (cmd[i])
     {
-        if (cmd[i] == 34)
+        if (cmd[i - 1] && cmd[i - 1] == ' ' && cmd[i] == 34)
             return (34);
-        if (cmd[i] == 39)
+        if (cmd[i - 1] && cmd[i - 1] == ' ' && cmd[i] == 39)
             return (39);
         i++;
     }
