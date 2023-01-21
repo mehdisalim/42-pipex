@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esalim <esalim@student.1337.ma>            +#+  +:+       +#+         #
+#    By: esalim <esalim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/24 14:46:50 by esalim            #+#    #+#              #
-#    Updated: 2022/12/28 16:23:24 by esalim           ###   ########.fr        #
+#    Updated: 2023/01/21 12:43:52 by esalim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	pipex
 
 CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra
-SRC		=	src/pipex.c src/error.c src/pipex_utils.c src/error.c
+SRC		=	src/pipex.c src/pipex_utils.c src/free_leaks.c
 OBJ		=	${SRC:.c=.o}
 RM		=	rm -f
 
